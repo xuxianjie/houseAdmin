@@ -1,0 +1,14 @@
+<view class="login-box" hidden="{{!show}}">
+  <view class="background" bindtap="overlyTap">
+
+  </view>
+  <view class="login" catchtap="prevent">
+
+    <view class="close-btn" bindtap="overlyTap">
+      <image src="../../images/close-btn.png"></image>
+    </view>
+    <image class="logo" src="../../images/logo.png"></image>
+    <view class="login-word">小程序需要获取您的公开信息(昵称、头像等)</view>
+    <button class="login-btn" open-type="getUserInfo" bindgetuserinfo="login">点击授权</button>
+  </view>
+</view>

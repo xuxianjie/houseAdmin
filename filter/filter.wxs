@@ -1,0 +1,111 @@
+var filter = {
+  getDate: function (time,type) {
+    var week = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日",];
+    if(time){
+      time = Number(time);
+      var date = getDate(time);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+      Y = date.getFullYear() + '-';
+      M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+      D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+      D = D + " ";
+      h = date.getHours() < 10 ? '0' + date.getHours() + ":" : date.getHours() + ":";
+      m = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+      s = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
+      if (type == 1) {
+        return Y + M + D + h + m + ":" + s
+      } else if (type == 2) {
+        return Y + M + D
+      } else if(type == 3){
+        return Y + M + D + h + m
+      } else if(type == 4){
+        return h + m + ":" + s
+      } else if(type == 5){
+        return h + "00"
+      } else if(type == 6){
+        return h + m
+      } else if (type==7){
+        return M + D + h + m
+      } else if(type==8){
+        var index = date.getDay()-1;
+        return week[index]
+      }
+    }else{
+      return "未知"
+    }
+  },
+  getSurplusDay: function (time,day) {
+    var date = getDate().getTime();
+    var endTime = time + day*86400000;
+    var surplusDay = ((endTime - date) / 86400000);
+    return Math.round(surplusDay)
+  },
+  // 默认无图片时使用默认图片。
+  addBaseUrl: function (url,need=true){
+    if(url){
+      if (url.indexOf("http") == -1) {
+        return "https://jiajia.uchar.cn/jiajia" + url
+        //return "https://app.kilobee.com/jiayou" + url
+      }else{
+        return url
+      }
+    }else{
+      return need?"../../images/default.png":''
+    }
+  },
+  
+
+  // 字符串在页面加密 如手机号 176****1862
+  filterNumber: function (str) {
+
+    var arr = str.split('')
+    console.log(arr)
+    for (var i = 0; i < arr.length; i++) {
+      if (i < 3 || i > 6) {
+        //  arr[i] = '*'
+      } else {
+        arr[i] = '*'
+      }
+    }
+    str = arr.join('')
+    return str
+  },
+  // 保留有效数字
+  toFixed: function (number, num) {
+    return number.toFixed(num)
+  },
+  //返回差值
+  sliceNumber: function (all, num) {
+    return (all / num)
+  },
+  // 需要在对应page页 onshow =>setdata 一个当前时间并在wxml传入
+  // @time 传入的时间
+  // @now 传入的当前时间
+  // @返回时差
+  countDown: function (time, now) {
+    console.log(time)
+    console.log(now)
+    var count = now - time
+    console.log(count)
+    if (count > 31536000000) {
+      return '1年前'
+    } else if (count > 2592000000) {
+      var index = Math.floor(count / 2592000000)
+      return index + '月前'
+    } else if (count > 86400000) {
+      var index = Math.floor(count / 86400000)
+      return index + '天前'
+    } else if (count > 3600000) {
+      var index = Math.floor(count / 3600000)
+      return index + '小时前'
+    } else if (count > 60000) {
+      var index = Math.floor(count / 60000)
+      return index + '分钟前'
+    } else {
+      return '刚刚'
+    }
+  }
+}
+
+module.exports = {
+  filter: filter
+}

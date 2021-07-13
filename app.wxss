@@ -1,0 +1,235 @@
+/* 初始化样式 */
+
+page {
+  width: 100%;
+  height: 100%;
+  color: #333;
+}
+
+.container {
+  width: 100%;
+  min-height: 100%;
+  position: relative;
+}
+
+image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+button {
+  margin: 0;
+}
+
+view {
+  box-sizing: border-box;
+}
+
+.theme {
+  background-color: #8a342d;
+}
+.theme-word{
+  color: #4c8cfd !important;
+}
+.theme-back{
+  background-color: #4c8cfd;
+  color: #fff !important;
+}
+button{
+  padding: 0;
+  border-radius: 0;
+  background-color: transparent;
+
+}
+button::after{
+  border: 0;
+}
+/* input picker 未输入时的样式 */
+
+.noInput {
+  color: #999 !important;
+}
+
+/* 暂无图片 */
+
+.no-list {
+  width: 300rpx;
+  height: 300rpx;
+  margin: 200rpx auto;
+}
+/* 暂无文本 */
+.empty-list {
+  font-size: 28rpx;
+  line-height: 100rpx;
+  text-align: center;
+  color: #333;
+}
+
+/* 背景图片 */
+
+.background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}
+
+/* 提交图片 */
+
+.push-btn {
+  width: 686rpx;
+  height: 78rpx;
+  margin: 130rpx auto;
+  padding: 0;
+  line-height: 78rpx;
+  text-align: center;
+  font-size: 40rpx;
+  color: #fff;
+  background-color: #4c8cfd;
+  border-radius: 12rpx;
+}
+
+.fixed-btn {
+  width: 686rpx;
+  height: 78rpx;
+  border-radius: 12rpx;
+  position: fixed;
+  bottom: 68rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4c8cfd;
+  counter-reset: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 轮播图 */
+
+swiper {
+  width: 100%;
+  height: 400rpx;
+}
+
+.member-cell {
+  height: 100rpx;
+  font-size: 30rpx !important;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 0 30rpx 0 30rpx;
+}
+
+.member-cell image {
+  width: 60rpx;
+  height: 60rpx;
+  margin-right: 30rpx;
+}
+
+
+/* flex */
+.flex {
+  flex: 1;
+}
+
+.flex-row {
+  display: flex;
+  align-items: center;
+}
+
+/* 左右布局的flex */
+
+.flex-row-center {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-row-center-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-col-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* 垂直居中的felx 上图，下文字 */
+
+.flex-col-center-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-col-center-center-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 文本省略 */
+.hide-word {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* 多行文本省略 */
+.line-hide-word {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* 价格颜色 */
+.price-word {
+  color: #ff5402 !important;
+}
+
+
+
+/* 海报 */
+
+.poster {
+  background-color: transparent !important;
+}
+
+.poster button {
+  width: 420rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 32rpx;
+  letter-spacing: 4rpx;
+  color: #fff;
+  background: #447690;
+  border-radius: 40rpx;
+  margin-top: 30rpx;
+}
+
+/* 阴影 */
+
+.shadow-bottom {
+  box-shadow: 0 3rpx 15rpx 3rpx rgba(0, 0, 0, 0.2);
+}
+
+.shadow {
+  box-shadow: 0 0rpx 15rpx 3rpx rgba(0, 0, 0, 0.2);
+}
+
+.parse-box {
+  padding: 30rpx;
+}
+.parse-box image {
+  max-width: 100% !important;
+}

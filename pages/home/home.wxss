@@ -1,0 +1,9 @@
+.container{
+  padding-top: 100rpx;
+  padding:100rpx 30rpx 0;
+}
+.container .tab{
+  width: 690rpx;
+  height: 100rpx;
+  margin: 0 auto 80rpx;
+}

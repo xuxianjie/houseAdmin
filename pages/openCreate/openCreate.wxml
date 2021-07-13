@@ -1,0 +1,91 @@
+<wxs src="../../filter/filter.wxs" module="filter" />
+<van-toast id="van-toast" />
+<!-- https://github.com/wx-plugin/image-cropper -->
+<image-cropper id="image-cropper" bindload="cropperload" bindimageload="loadimage"
+  limit_move="{{true}}" disable_rotate="{{disable_rotate}}" width="{{300}}" height="{{300}}" imgSrc="{{src}}"
+  angle="{{angle}}" disable_width="{{disable_width}}"
+  disable_height="{{disable_height}}" disable_ratio="{{true}}" show="{{cropperBool}}" bindcancel="cropperCancel" bindconfirm="cropperConfirm">
+</image-cropper>
+<form bindsubmit="postInfo">
+  <view class="container">
+    <van-cell title="姓名" size="large" custom-class="member-cell" required title-width="220rpx" >
+      <input placeholder='输入2-4个中文或2-8个英文' value="{{open.name}}" data-type='name' bindinput="inputSome" placeholder-style='color:#999999'></input>
+      <image slot="right-icon" src="../../images/yes.png" style="border-radius=6rpx;width:40rpx;height:40rpx;" hidden="{{errName || open.name.length == 0}}" />
+      <image slot="right-icon" src="../../images/no.png" style="border-radius=6rpx;width:40rpx;height:40rpx;" hidden="{{!errName || open.name.length == 0}}" />
+    </van-cell>
+
+    <picker mode="region" bindchange='traggleRegion'>
+      <van-cell title="客户地区" size="large" custom-class="member-cell" title-width="220rpx" is-link>
+        <view class='cell-info {{open.region?"":"noInput"}}'>{{open.region || '选填'}}</view>
+      </van-cell>
+    </picker>
+
+
+    <van-cell title="联系地址" size="large" custom-class="member-cell " title-width="220rpx" >
+      <input placeholder='选填' value="{{open.addressDetail}}" bindinput='inputAddress' placeholder-style='color:#999999' data-type='addressDetail' bindinput="inputSome"></input>
+    </van-cell>
+
+
+    <van-cell title="手机" size="large" custom-class="member-cell margin" title-width="220rpx">
+      <input placeholder='选填' value="{{open.mobilePhone}}"  data-type='mobilePhone' bindinput="inputSome" maxlength='11' placeholder-style='color:#999999'></input>
+    </van-cell>
+
+
+    <!-- radio-->
+    <van-cell title="性别" title-width="200rpx" size="large" required custom-class="member-cell" data-type='gender' bindinput="changeSome">
+      <van-radio-group value="{{ open.gender }}"  style="display:flex;"  data-type='gender' bindinput="changeSome">
+        <van-radio name="0" style='margin-right:40rpx;'>男</van-radio>
+        <van-radio name="1">女</van-radio>
+      </van-radio-group>
+    </van-cell>
+
+    <picker mode="multiSelector" bindchange='traggleRegion' value="{{nowTime}}" bindchange='setDeadLine' range="{{timeArray}}" bindcolumnchang="setDeadLine">
+      <van-cell title="报名截止时间" size="large" custom-class="member-cell" title-width="220rpx" is-link>
+        <view class='cell-info {{open.region?"":"noInput"}}'>{{open.region || '选填'}}</view>
+      </van-cell>
+    </picker>
+
+    <!-- 图片-单个 -->
+    <view class='img'>
+
+
+      <van-cell title="预览图" size="large" custom-class="member-cell margin" border="{{false}}">
+
+      </van-cell>
+      <view class='img-list'>
+        <view class='item' wx:if="{{open.imageUrl}}">
+          <image src="{{item}}" mode='aspectFill'></image>
+          <view class='delete' catchtap='deleteImage'>
+            <image src='../../images/delete.png'></image>
+          </view>
+        </view>
+        <view class='add-img' bindtap="getImage" wx:if="{{!open.imageUrl}}">
+          <image src='../../images/add-img.png' style="width:100%;height:100%"></image>
+        </view>
+      </view>
+    </view>
+
+    <!-- 图片-多个 -->
+    <view class='img'>
+      <van-cell title="轮播图" size="large" custom-class="member-cell margin" border="{{false}}">
+
+      </van-cell>
+      <view class='img-list'>
+        <view class='item' wx:for="{{open.imageUrls}}" wx:key="{{item}}">
+          <image src="{{filter.filter.addBaseUrl(item)}}" mode='aspectFill'></image>
+          <view class='delete' catchtap='deleteImages' data-index="{{index}}">
+            <image src='../../images/delete.png' data-index="{{index}}"></image>
+          </view>
+        </view>
+        <view class='add-img' bindtap="getImageList" hidden="{{open.imageUrls.length >=3}}">
+          <image src='../../images/add-img.png' style="width:100%;height:100%"></image>
+        </view>
+      </view>
+    </view>
+
+    <button form-type="submit" class="push-btn">
+      提交
+    </button>
+
+  </view>
+</form>

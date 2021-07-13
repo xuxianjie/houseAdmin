@@ -1,0 +1,38 @@
+<!-- 个人信息描述 -->
+<view class='mine-container'>
+  <view class='mine-info'>
+      <!-- 背景图片-->
+    <view class="background">
+      <image src="../../images/background-.png" />
+    </view>
+    <navigator url="../myInfo/myInfo" class="info-content">
+        <image src="" class="header-img" />
+        <view class="info-r">
+
+        </view>
+    </navigator>
+
+  </view>
+
+
+  <view class='mine-list'>
+    <van-cell title="我的预约" url="../poster/poster" is-link  size="large">
+      <van-icon slot="icon" name="friends" class="custom-icon" color="#ff0000" size="40rpx" custom-style="margin-right:30rpx;margin-top:5rpx;" />
+    </van-cell>
+        <van-cell title="我的预约" url="../poster/poster" is-link  size="large">
+      <van-icon slot="icon" name="friends" class="custom-icon" color="#ff0000" size="40rpx" custom-style="margin-right:30rpx;margin-top:5rpx;" />
+    </van-cell>
+    <van-cell title="我的社区" url="../poster/poster" is-link  size="large">
+      <image slot="icon" src="../../images/circle..png"  />
+    </van-cell>
+  </view>
+
+</view>
+<!-- <van-cell-group>
+  <van-cell icon="location" url="../poster/poster" title="单元格" is-link value="内容" />
+  <van-cell slot="icon" url="../poster/poster" title="单元格" is-link value="内容" /> -->
+  <!-- <van-cell title="单元格" value="内容" label="描述信息" border="{{ false }}" /> -->
+  <!-- <van-cell title="单元格">
+    <van-icon slot="icon" color='#990000' size='40rpx' name="close" class="custom-icon" style='margin-right:30rpx' />
+  </van-cell>
+</van-cell-group> -->

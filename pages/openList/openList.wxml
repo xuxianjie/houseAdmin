@@ -1,0 +1,13 @@
+<wxs src="../../filter/filter.wxs" module="filter" />
+<van-toast id="van-toast" />
+<view class="container">
+
+  <view class='list'>
+    <navigator hover-class="none" url='../open/open?openId={{item.id}}' class='item' wx:for="{{openList}}" wx:key = "{{id}}" >
+      
+    </navigator>
+  </view>
+  <view class="no-list" wx:if="{{!openList.length}}">
+    <image src="../../images/nothing.png" />
+  </view>
+</view>

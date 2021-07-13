@@ -1,0 +1,11 @@
+<wxs src="../../filter/filter.wxs" module="filter" />
+<van-toast id="van-toast" />
+<view class="container">
+
+  <view class='list'>
+    <view  class='item' wx:for="{{writeRecordList}}" wx:key = "{{id}}" >
+      
+    </view>
+  </view>
+
+</view>
