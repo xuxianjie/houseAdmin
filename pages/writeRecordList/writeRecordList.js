@@ -12,24 +12,12 @@ Page({
     popupBool: false
   },
 
-  // 切换
-  traggleTab: function (e) {
-    this.setData({
-      status: e.currentTarget.dataset.status,
-      noOrder: false
-    })
-    this.getWriteRecordList(true)
-  },
-
-
-
 
   onLoad: function (options) {
     this.setData({
       userId: wx.getStorageSync('user').userId
     })
   },
-
 
   onShow: function () {
     this.getWriteRecordList()
@@ -41,15 +29,22 @@ Page({
       content:'请确认填写完毕？',
       success:res=>{
         if(res.confirm){
-          const recordList = [...this.data.householdListOne,...this.data.householdListTwo]
-          
+          const householdList = [...this.data.householdListOne,...this.data.householdListTwo]
+          // const result = wx.$http.post('household',{householdList})
+          wx.cloud.database().collection('household').doc('b00064a760eeb6fe274ca396414e58b9').update({
+            data: {
+              electric:500,
+              water:500
+            }
+          }).then(res=>{
+            console.log(res)
+          })
         }
       }
     })
   },
   // 输入
   inputKind(e){
-    console.log(e)
     const {type,index,building} = e.currentTarget.dataset
     const array = building === 1? this.data.householdListOne:this.data.householdListTwo
     array[index][type] = parseInt(e.detail.value) 
@@ -82,7 +77,7 @@ Page({
     })
     // 传入 isFirst   是否加载第一页
     // 当首次加载 则pageNum=1
-    return wx.cloud.callFunction({ name: 'household' }).then(res => {
+    return wx.$http.get('household').then(res => {
       if (!res.errCode) {
         Toast.clear()
         const householdListOne = res.result.filter(item => { return item.building === 1 })

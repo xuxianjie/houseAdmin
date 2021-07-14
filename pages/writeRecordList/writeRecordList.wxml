@@ -44,7 +44,7 @@
     </view>
   </view>
   <view class="btn-box">
-    <view class="submit-btn">提交</view>  
+    <view class="submit-btn" bindtap="submit">提交</view>  
   </view>
   <!-- 遮罩层 弹出框， 模态框，海报  -->
   <!-- <van-popup custom-class="popup flex-col-center" show="{{ popupBool }}" overlay="true" bind:click-overlay="showPopup"
