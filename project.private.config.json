@@ -1,4 +1,5 @@
 {
+  "setting": {},
   "condition": {
     "plugin": {
       "list": []
@@ -35,6 +36,12 @@
         {
           "name": "pages/writeRecordList/writeRecordList",
           "pathName": "pages/writeRecordList/writeRecordList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/householdList/householdList",
+          "pathName": "pages/householdList/householdList",
           "query": "",
           "scene": null
         }

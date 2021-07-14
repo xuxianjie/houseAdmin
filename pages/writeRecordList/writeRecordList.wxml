@@ -3,9 +3,62 @@
 <view class="container">
 
   <view class='list'>
-    <view  class='item' wx:for="{{writeRecordList}}" wx:key = "{{id}}" >
+    <view class="title">
+      <view>四巷13号</view>
       
+      <view>上月水</view>
+      <view>水</view>
+      <view>上月电</view>
+      <view>电</view>
+    </view>
+    <view class='item' wx:for="{{householdListOne}}" wx:key="{{id}}">
+      <view>{{item.name}}</view>
+      <view>{{item.water}}</view>
+      <view>
+        <input type="number" bindinput="inputKind" data-type="water" data-building="{{item.building}}" data-index="{{index}}" />
+      </view>
+      <view>{{item.electric}}</view>
+      <view>
+        <input type="number" bindinput="inputKind" data-type="electric" data-building="{{item.building}}" data-index="{{index}}" />
+      </view>
     </view>
   </view>
-
+  <view class='list'>
+    <view class="title">
+      <view>五巷15号</view>
+      <view>上月水</view>
+      <view>水</view>
+      <view>上月电</view>
+      <view>电</view>
+    </view>
+    <view class='item' wx:for="{{householdListTwo}}" wx:key="{{id}}">
+      <view>{{item.name}}</view>
+      <view>{{item.water}}</view>
+      <view>
+        <input type="number" bindinput="inputKind" data-type="water" data-building="{{item.building}}" data-index="{{index}}" />
+      </view>
+      <view>{{item.electric}}</view>
+      <view>
+        <input type="number" bindinput="inputKind" data-type="electric" data-building="{{item.building}}" data-index="{{index}}" />
+      </view>
+    </view>
+  </view>
+  <view class="btn-box">
+    <view class="submit-btn">提交</view>  
+  </view>
+  <!-- 遮罩层 弹出框， 模态框，海报  -->
+  <!-- <van-popup custom-class="popup flex-col-center" show="{{ popupBool }}" overlay="true" bind:click-overlay="showPopup"
+    close-on-click-overlay="true">
+    <view class="detail">
+      <view class="detail-title">{{detail.building === 1?'四巷13号':'五巷15号'}}{{detail.name}}</view>
+      <view class="flex-row-center">
+        水
+        <input type="text" bindInput="kindInput" data-type = "water">
+      </view>
+      <view class="flex-row-center">
+        电
+        <input type="text" bindInput="kindInput" data-type = "water">
+      </view>
+    </view>
+  </van-popup> -->
 </view>

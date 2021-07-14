@@ -1,0 +1,66 @@
+.container{
+  padding:30rpx;
+}
+.list{
+  width: 100%;
+  border-radius: 20rpx;
+  border:1rpx solid #f2f2f2;
+  overflow: hidden;
+  margin-bottom: 30rpx;
+}
+.title{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: #f2f2f2;
+  font-size: 28rpx;
+  font-weight: 700;
+}
+.item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  height: 62rpx;
+  line-height: 62rpx;
+  font-size: 24rpx;
+}
+.item>view,
+.title>view,
+.item>input{
+  flex:1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.item input{
+  border: 1rpx solid #f2f2f2;
+  font-size: 24rpx;
+  width: 80%;
+}
+
+/* 底部按钮 */
+.btn-box{
+  width: 690rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 40rpx;
+}
+.btn-box>view{
+  flex: 1;
+}
+.btn-box>view:first-of-type{
+  background-color: #07c160;
+  color: #fff;
+  font-size: 40rpx;
+  text-align: center;
+  line-height: 80rpx;
+  height: 80rpx;
+  border-radius: 30rpx;
+  
+}
