@@ -17,6 +17,9 @@ const http = {
     const res = await wx.cloud.callFunction({ name: api,data:{...data,httpType:'update'}})
     return res
   },
+  getMsg:function(errMsg){
+    return errMsg === 'cloud.callFunction:ok'
+  }
 }
 
 module.exports = http

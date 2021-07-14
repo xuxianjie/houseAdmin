@@ -1,5 +1,6 @@
 .container{
   padding:30rpx;
+  padding-bottom: 150px;
 }
 .list{
   width: 100%;
@@ -7,6 +8,7 @@
   border:1rpx solid #f2f2f2;
   overflow: hidden;
   margin-bottom: 30rpx;
+  padding-bottom: 20rpx;
 }
 .title{
   display: flex;
@@ -27,6 +29,7 @@
   height: 62rpx;
   line-height: 62rpx;
   font-size: 24rpx;
+  margin-top: 10rpx;
 }
 .item>view,
 .title>view,

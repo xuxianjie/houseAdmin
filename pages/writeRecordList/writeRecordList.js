@@ -27,18 +27,23 @@ Page({
     wx.showModal({
       title:'确认提交吗',
       content:'请确认填写完毕？',
-      success:res=>{
+      success:async res=>{
         if(res.confirm){
           const householdList = [...this.data.householdListOne,...this.data.householdListTwo]
-          // const result = wx.$http.post('household',{householdList})
-          wx.cloud.database().collection('household').doc('b00064a760eeb6fe274ca396414e58b9').update({
-            data: {
-              electric:500,
-              water:500
-            }
-          }).then(res=>{
-            console.log(res)
-          })
+          const result =await wx.$http.add('record',{householdList})
+          console.log(result)
+          if(wx.$http.getMsg(result.errMsg)){
+            wx.showToast({
+              title: '提交成功',
+            })
+            wx.navigateBack({
+              delta: 0,
+            })
+          }else{
+            wx.showToast({
+              title: result.errMsg,
+            })
+          }
         }
       }
     })
@@ -47,7 +52,12 @@ Page({
   inputKind(e){
     const {type,index,building} = e.currentTarget.dataset
     const array = building === 1? this.data.householdListOne:this.data.householdListTwo
-    array[index][type] = parseInt(e.detail.value) 
+    array[index]['current'+type] = parseInt(e.detail.value) 
+    if(type == 'water'){
+      array[index]['currentWater'] = parseInt(e.detail.value) 
+    }else{
+    array[index]['currentElectric'] = parseInt(e.detail.value) 
+    }
     if(building === 1){
       this.setData({
         householdListOne:array
@@ -80,6 +90,7 @@ Page({
     return wx.$http.get('household').then(res => {
       if (!res.errCode) {
         Toast.clear()
+        console.log(res)
         const householdListOne = res.result.filter(item => { return item.building === 1 })
         const householdListTwo = res.result.filter(item => { return item.building === 2 })
         this.setData({
@@ -119,9 +130,7 @@ Page({
   },
 
   onPullDownRefresh: function () {
-    wx.showLoading({
-      title: '刷新中...',
-    })
+
     this.getWriteRecordList().then(res => {
       wx.stopPullDownRefresh()
       wx.hideLoading()
@@ -142,20 +151,5 @@ Page({
 
   onShareAppMessage: function () {
 
-  },
-
-  // 返回数据数组转换
-  reverseImageUrls: function (imageUrls) {
-    if (imageUrls && typeof imageUrls == 'string' && imageUrls.length > 0) {
-      try {
-
-        return JSON.parse(imageUrls);
-      } catch (e) {
-
-        return imageUrls.split(',');
-      }
-    } else {
-      return imageUrls
-    }
   },
 })

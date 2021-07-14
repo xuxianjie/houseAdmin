@@ -3,6 +3,6 @@
 
 <view class="container">
   <van-button size="large" type="primary" round custom-class="tab" bind:click="goWriteRecord">记录水电</van-button>
-  <van-button size="large" type="primary" round custom-class="tab" bind:click="goHouseholdList">查看信息</van-button>
+  <!-- <van-button size="large" type="primary" round custom-class="tab" bind:click="goHouseholdList">查看信息</van-button> -->
   <van-button size="large" type="primary" round custom-class="tab" bind:click="goOpen">开单</van-button>
 </view>
