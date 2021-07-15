@@ -40,8 +40,8 @@
           "scene": null
         },
         {
-          "name": "pages/householdList/householdList",
-          "pathName": "pages/householdList/householdList",
+          "name": "pages/openCreate/openCreate",
+          "pathName": "pages/openCreate/openCreate",
           "query": "",
           "scene": null
         }

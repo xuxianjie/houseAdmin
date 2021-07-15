@@ -29,6 +29,11 @@ Page({
       url: '/pages/writeRecordList/writeRecordList',
     })
   },
+  goOpen(){
+    wx.navigateTo({
+      url: '/pages/openCreate/openCreate',
+    })
+  },
   getImage() {
     wx.chooseImage({
       count: 1,

@@ -1,91 +1,106 @@
 <wxs src="../../filter/filter.wxs" module="filter" />
 <van-toast id="van-toast" />
-<!-- https://github.com/wx-plugin/image-cropper -->
-<image-cropper id="image-cropper" bindload="cropperload" bindimageload="loadimage"
-  limit_move="{{true}}" disable_rotate="{{disable_rotate}}" width="{{300}}" height="{{300}}" imgSrc="{{src}}"
-  angle="{{angle}}" disable_width="{{disable_width}}"
-  disable_height="{{disable_height}}" disable_ratio="{{true}}" show="{{cropperBool}}" bindcancel="cropperCancel" bindconfirm="cropperConfirm">
-</image-cropper>
-<form bindsubmit="postInfo">
-  <view class="container">
-    <van-cell title="姓名" size="large" custom-class="member-cell" required title-width="220rpx" >
-      <input placeholder='输入2-4个中文或2-8个英文' value="{{open.name}}" data-type='name' bindinput="inputSome" placeholder-style='color:#999999'></input>
-      <image slot="right-icon" src="../../images/yes.png" style="border-radius=6rpx;width:40rpx;height:40rpx;" hidden="{{errName || open.name.length == 0}}" />
-      <image slot="right-icon" src="../../images/no.png" style="border-radius=6rpx;width:40rpx;height:40rpx;" hidden="{{!errName || open.name.length == 0}}" />
-    </van-cell>
+<view class="container">
 
-    <picker mode="region" bindchange='traggleRegion'>
-      <van-cell title="客户地区" size="large" custom-class="member-cell" title-width="220rpx" is-link>
-        <view class='cell-info {{open.region?"":"noInput"}}'>{{open.region || '选填'}}</view>
-      </van-cell>
-    </picker>
-
-
-    <van-cell title="联系地址" size="large" custom-class="member-cell " title-width="220rpx" >
-      <input placeholder='选填' value="{{open.addressDetail}}" bindinput='inputAddress' placeholder-style='color:#999999' data-type='addressDetail' bindinput="inputSome"></input>
-    </van-cell>
-
-
-    <van-cell title="手机" size="large" custom-class="member-cell margin" title-width="220rpx">
-      <input placeholder='选填' value="{{open.mobilePhone}}"  data-type='mobilePhone' bindinput="inputSome" maxlength='11' placeholder-style='color:#999999'></input>
-    </van-cell>
-
-
-    <!-- radio-->
-    <van-cell title="性别" title-width="200rpx" size="large" required custom-class="member-cell" data-type='gender' bindinput="changeSome">
-      <van-radio-group value="{{ open.gender }}"  style="display:flex;"  data-type='gender' bindinput="changeSome">
-        <van-radio name="0" style='margin-right:40rpx;'>男</van-radio>
-        <van-radio name="1">女</van-radio>
-      </van-radio-group>
-    </van-cell>
-
-    <picker mode="multiSelector" bindchange='traggleRegion' value="{{nowTime}}" bindchange='setDeadLine' range="{{timeArray}}" bindcolumnchang="setDeadLine">
-      <van-cell title="报名截止时间" size="large" custom-class="member-cell" title-width="220rpx" is-link>
-        <view class='cell-info {{open.region?"":"noInput"}}'>{{open.region || '选填'}}</view>
-      </van-cell>
-    </picker>
-
-    <!-- 图片-单个 -->
-    <view class='img'>
-
-
-      <van-cell title="预览图" size="large" custom-class="member-cell margin" border="{{false}}">
-
-      </van-cell>
-      <view class='img-list'>
-        <view class='item' wx:if="{{open.imageUrl}}">
-          <image src="{{item}}" mode='aspectFill'></image>
-          <view class='delete' catchtap='deleteImage'>
-            <image src='../../images/delete.png'></image>
-          </view>
-        </view>
-        <view class='add-img' bindtap="getImage" wx:if="{{!open.imageUrl}}">
-          <image src='../../images/add-img.png' style="width:100%;height:100%"></image>
-        </view>
-      </view>
+    <view class="title">四巷13号 </view>
+  <view class='list'>
+    <view class='item {{item.isTap?"active":""}}' wx:for="{{householdListOne}}" wx:key="{{id}}" bindtap="showDetail" data-detail="{{item}}">
+      {{item.name}}
     </view>
-
-    <!-- 图片-多个 -->
-    <view class='img'>
-      <van-cell title="轮播图" size="large" custom-class="member-cell margin" border="{{false}}">
-
-      </van-cell>
-      <view class='img-list'>
-        <view class='item' wx:for="{{open.imageUrls}}" wx:key="{{item}}">
-          <image src="{{filter.filter.addBaseUrl(item)}}" mode='aspectFill'></image>
-          <view class='delete' catchtap='deleteImages' data-index="{{index}}">
-            <image src='../../images/delete.png' data-index="{{index}}"></image>
-          </view>
-        </view>
-        <view class='add-img' bindtap="getImageList" hidden="{{open.imageUrls.length >=3}}">
-          <image src='../../images/add-img.png' style="width:100%;height:100%"></image>
-        </view>
-      </view>
-    </view>
-
-    <button form-type="submit" class="push-btn">
-      提交
-    </button>
-
   </view>
-</form>
+    <view class="title"> 五巷15号 </view>
+  <view class='list'>
+    <view class='item {{item.isTap?"active":""}}' wx:for="{{householdListTwo}}" wx:key="{{id}}" >
+      {{item.name}}
+
+    </view>
+  </view>
+
+  <!-- 遮罩层 弹出框， 模态框，海报  -->
+  <van-popup custom-class="popup flex-col-center" show="{{ popupBool }}" overlay="true" bind:click-overlay="showPopup"
+    close-on-click-overlay="true">
+    <view class="detail">
+      <view class="name">
+        <view class="left">房号：</view>
+        <view class="">{{detail.building === 1?'四巷13号':'五巷15号'}}{{detail.name}}</view>
+      </view>
+      <view class="detail-item">
+        <view>房租：</view>
+        <view class="special">{{detail.rent}}</view>
+        元
+      </view>
+      <view class="group">
+        <view class=" flex-row-center" style="padding-left: 40rpx;">
+          <view class="flex flex-row detail-item">
+            <view>管理费：</view>
+            <view class="special">{{detail.adminPrice}}</view>
+            元
+          </view>
+          <view class="flex flex-row detail-item">
+            <view>网费：</view>
+            <view class="special">{{detail.netPrice}}</view>
+            元
+          </view>
+        </view>
+        
+        <view class="flex-row-center" style="padding-left: 40rpx;">
+          <view class="flex flex-row detail-item">
+            <view>清洁费：</view>
+            <view class="special">{{detail.clearPrice}}</view>
+            元
+          </view>
+          <view class="flex flex-row detail-item">
+            <view>电视费：</view>
+            <view class="special">{{detail.tvPrice}}</view>
+            元
+          </view>
+        </view>
+  
+      </view>
+      <view  class="group">
+        <view class="detail-item flex-row-center">
+          <view>用水：</view>
+          <view class="special">{{detail.water}}</view>
+          <view class="symbol">-</view>
+          <view class="special">{{detail.lastWater}}</view>
+          <view class="symbol">=</view>
+          <view class="special">{{detail.useWater}}</view>
+          方
+        </view>
+        <view class="detail-item flex-row-center">
+          <view>水费：</view>
+          <view class="special">{{detail.useWater}}</view>
+          <view class="symbol">X</view>
+          <view class="special" >{{detail.name === '2楼'?1:1.2}}</view>
+          <view class="symbol">=</view>
+          <view class="special">{{detail.useWaterPrice}}</view>
+          元
+        </view>
+      </view>
+      <view class="group">
+        <view class="detail-item flex-row-center">
+          <view>用电：</view>
+          <view class="special">{{detail.electric}}</view>
+          <view class="symbol">-</view>
+          <view class="special">{{detail.lastElectric}}</view>
+          <view class="symbol">=</view>
+          <view class="special">{{detail.useElectric}}</view>
+          度
+        </view>
+        <view class="detail-item flex-row-center">
+          <view>电费：</view>
+          <view class="special">{{detail.useElectric}}</view>
+          <view class="symbol">X</view>
+          <view class="special">{{detail.name === '2楼'?6:7}}</view>
+          <view class="symbol">=</view>
+          <view class="special">{{detail.useElectricPrice}}</view>
+          元
+        </view>
+      </view>
+      <view class="detail-item all-price">
+        合计金额：<view class="special">{{detail.allPrice}}</view>元
+      </view>
+
+    </view>
+  </van-popup>
+</view>

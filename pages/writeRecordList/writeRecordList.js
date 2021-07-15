@@ -129,25 +129,6 @@ Page({
     })
   },
 
-  onPullDownRefresh: function () {
-
-    this.getWriteRecordList().then(res => {
-      wx.stopPullDownRefresh()
-      wx.hideLoading()
-    })
-
-  },
-
-
-
-  onReachBottom: function () {
-    // 判断是否还有更多
-    if (this.data.writeRecordList.length < this.data.pageCount) {
-      this.data.pageNum++
-      this.getWriteRecordList()
-    }
-  },
-
 
   onShareAppMessage: function () {
 
